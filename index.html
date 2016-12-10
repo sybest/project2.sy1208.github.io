@@ -42,6 +42,117 @@
 <a id="polynomial-addition" class="anchor" href="#polynomial-addition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>polynomial addition</h1>
 
 <p>Project request is at: <a href="http://sec.prof.ninja/projects/">http://sec.prof.ninja/projects/</a></p>
+
+<h1>
+<a id="source-code" class="anchor" href="#source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Source Code:</h1>
+
+<pre><code>#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;fstream&gt;
+using namespace std;
+void adding(int n1, int n2, int* A1, int* A2)
+{
+    if (n1 &gt; n2)
+    {
+        int* result = new int[n1 + 1];
+        result[0] = n1;
+        int i(n1), j(n2),k(n1-n2);
+        while (j &gt;= 0)
+        {
+            result[i] = A1[i - 1] + A2[j - 1];
+            i--; j--;
+        }
+        for (int h = 1; h &lt; k + 1; h++)
+        {
+            result[h] = A1[h-1];
+        }
+        for (int h = 0; h &lt; n1 + 1; h++)
+        {
+            cout &lt;&lt; result[h]&lt;&lt;" ";
+        }
+        delete[] result;
+    }
+    else if (n1 &lt; n2)
+    {
+        int* result = new int[n2 + 1];
+        result[0] = n2;
+        int i(n1), j(n2), k(n2 - n1);
+        while (i &gt;= 0)
+        {
+            result[j] = A1[i - 1] + A2[j - 1];
+            i--; j--;
+        }
+        for (int h = 1; h &lt; k + 1; h++)
+        {
+            result[h] = A2[h-1];
+        }
+        for (int h = 0; h &lt; n2 + 1; h++)
+        {
+            cout &lt;&lt; result[h]&lt;&lt;" ";
+        }
+        delete[] result;
+    }
+    else if(n1==n2)
+    {
+        int* result = new int[n1 + 1];
+        result[0] = n1; 
+        for (int i = n1; i &gt; 0; i--)
+        {
+            result[i] = A1[i-1] + A2[i-1];
+        }
+        for (int h = 0; h &lt; n1 + 1; h++)
+        {
+            cout &lt;&lt; result[h]&lt;&lt;" ";
+        }
+        delete[] result;
+    }
+}
+int main(int argc, char *argv[])
+{
+    ifstream file1, file2;
+    file1.open(argv[1]);
+    int tmp_A1[100];
+    int i = 0;
+    while (!file1.eof())
+    {
+        file1 &gt;&gt; tmp_A1[i];
+        cout &lt;&lt; tmp_A1[i] &lt;&lt; " ";
+        i++;
+    }
+    int n1 = tmp_A1[0];
+    int *A1 = new int[n1];
+    for (int i = 0; i &lt; n1; i++)
+    {
+        A1[i] = tmp_A1[i + 1];
+
+    }
+    cout &lt;&lt; endl;
+    file1.close();
+    file2.open(argv[2]);
+    int tmp_A2[100];
+    i = 0;
+    while (!file2.eof())
+    {
+        file2 &gt;&gt; tmp_A2[i];
+        cout &lt;&lt; tmp_A2[i] &lt;&lt; " ";
+        i++;
+    }
+    int n2 = tmp_A2[0];
+    int* A2 = new int[n2];
+    for (int i = 0; i &lt; n2; i++)
+    {
+        A2[i] = tmp_A2[i + 1];
+
+    }
+    cout &lt;&lt; endl;
+    file2.close();
+    adding(n1, n2, A1, A2);
+    delete[] A1;
+    delete[] A2;
+    system("pause");
+    return 0;
+}
+</code></pre>
       </section>
 
     </div>
